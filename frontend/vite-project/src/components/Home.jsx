@@ -7,7 +7,7 @@ const Home = () => {
       <div className="max-w-3xl mx-auto bg-white p-6 rounded-lg shadow">
         <div className="text-center">
           <h2 className="text-2xl font-semibold mb-4">{homePage.title}</h2>
-          <p className="text-gray-300">{homePage.description}</p>
+          <p className="text-gray-800">{homePage.description}</p>
         </div>
       </div>
     </div>
