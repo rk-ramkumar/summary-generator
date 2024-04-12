@@ -9,46 +9,47 @@ const SignIn = () => {
   const [err, setErr] = useState(false);
 
   return (
-    <div className="sign-in">
-      <h2 style={{ textTransform: "uppercase" }}>Sign in</h2>
-      <Input
-        placeholder="Email"
-        style={inputBoxStyle}
-        onChange={({ target: { value } }) => {
-          setEmail(value);
-          setErr(false)
-        }}
-      />
-      <Input
-        placeholder="Password"
-        style={inputBoxStyle}
-        onChange={({ target: { value } }) => {
-          setPassword(value);
-          setErr(false)
-
-        }}
-      />
-      <Button
-        {...{
-          text: "Log in",
-          onClick: () => {
-            if (email === "") {
-              setErr(true);
-            }
-            if (password === "") {
-              setErr(true);
-            }
-            console.log(email, password, );
-            setEmail("");
-            setPassword("");
-          },
-        }}
-      />
-      {err && <div style={{ color: "red" }}> Fill all the above details</div>}
-      <div>
-        <a href="#" style={{ textDecoration: "none" }}>
-          Create a new account
-        </a>
+    <div className="flex-grow container mx-auto mt-10 px-4 sm:px-0">
+      <div className="sign-in max-w-3xl mx-auto">
+        <h2 style={{ textTransform: "uppercase" }}>Sign in</h2>
+        <Input
+          placeholder="Email"
+          style={inputBoxStyle}
+          onChange={({ target: { value } }) => {
+            setEmail(value);
+            setErr(false);
+          }}
+        />
+        <Input
+          placeholder="Password"
+          style={inputBoxStyle}
+          onChange={({ target: { value } }) => {
+            setPassword(value);
+            setErr(false);
+          }}
+        />
+        <Button
+          {...{
+            text: "Log in",
+            onClick: () => {
+              if (email === "") {
+                setErr(true);
+              }
+              if (password === "") {
+                setErr(true);
+              }
+              console.log(email, password);
+              setEmail("");
+              setPassword("");
+            },
+          }}
+        />
+        {err && <div style={{ color: "red" }}> Fill all the above details</div>}
+        <div>
+          <a href="#" style={{ textDecoration: "none" }}>
+            Create a new account
+          </a>
+        </div>
       </div>
     </div>
   );

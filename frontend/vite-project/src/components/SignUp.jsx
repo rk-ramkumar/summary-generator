@@ -10,42 +10,44 @@ const SignUp = () => {
   const [confirmPass, setConfirmPass] = useState("");
   const [err, setErr] = useState(false);
   return (
-    <div className="sign-up">
-      <h2 style={{ textTransform: "uppercase" }}>Sign up</h2>
-      <Input
-        placeholder="Name"
-        style={inputBoxStyle}
-        onChange={({ target: { value } }) => {
-          setName(value);
-          setErr(false);
-        }}
-      />
-      <Input
-        placeholder="Email"
-        style={inputBoxStyle}
-        onChange={({ target: { value } }) => {
-          setEmail(value);
-          setErr(false);
-        }}
-      />
-      <Input
-        placeholder="Password"
-        style={inputBoxStyle}
-        onChange={({ target: { value } }) => {
-          setPassword(value);
-          setErr(false);
-        }}
-      />
-      <Input
-        placeholder="Confirm Password"
-        style={inputBoxStyle}
-        onChange={({ target: { value } }) => {
-          setConfirmPass(value);
-          setErr(false);
-        }}
-      />
-      {err && <div style={{ color: "red" }}> Fill all the above details</div>}
-      <Button {...{ text: "Sign up", onClick: () => {} }} />
+    <div className="flex-grow container mx-auto mt-10 px-4 sm:px-0">
+      <div className="sign-up max-w-3xl mx-auto">
+        <h2 style={{ textTransform: "uppercase" }}>Sign up</h2>
+        <Input
+          placeholder="Name"
+          style={inputBoxStyle}
+          onChange={({ target: { value } }) => {
+            setName(value);
+            setErr(false);
+          }}
+        />
+        <Input
+          placeholder="Email"
+          style={inputBoxStyle}
+          onChange={({ target: { value } }) => {
+            setEmail(value);
+            setErr(false);
+          }}
+        />
+        <Input
+          placeholder="Password"
+          style={inputBoxStyle}
+          onChange={({ target: { value } }) => {
+            setPassword(value);
+            setErr(false);
+          }}
+        />
+        <Input
+          placeholder="Confirm Password"
+          style={inputBoxStyle}
+          onChange={({ target: { value } }) => {
+            setConfirmPass(value);
+            setErr(false);
+          }}
+        />
+        {err && <div style={{ color: "red" }}> Fill all the above details</div>}
+        <Button {...{ text: "Sign up", onClick: () => {} }} />
+      </div>
     </div>
   );
 };
