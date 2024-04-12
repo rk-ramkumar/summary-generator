@@ -3,20 +3,29 @@ import Input from "./Input";
 import { inputBoxStyle } from "../config/constants";
 import Button from "./Button";
 
-const SignIn = () => {
+const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
+  const [confirmPass, setConfirmPass] = useState("");
   const [err, setErr] = useState(false);
-
   return (
-    <div className="sign-in">
-      <h2 style={{ textTransform: "uppercase" }}>Sign in</h2>
+    <div className="sign-up">
+      <h2 style={{ textTransform: "uppercase" }}>Sign up</h2>
+      <Input
+        placeholder="Name"
+        style={inputBoxStyle}
+        onChange={({ target: { value } }) => {
+          setName(value);
+          setErr(false);
+        }}
+      />
       <Input
         placeholder="Email"
         style={inputBoxStyle}
         onChange={({ target: { value } }) => {
           setEmail(value);
-          setErr(false)
+          setErr(false);
         }}
       />
       <Input
@@ -24,34 +33,21 @@ const SignIn = () => {
         style={inputBoxStyle}
         onChange={({ target: { value } }) => {
           setPassword(value);
-          setErr(false)
-
+          setErr(false);
         }}
       />
-      <Button
-        {...{
-          text: "Log in",
-          onClick: () => {
-            if (email === "") {
-              setErr(true);
-            }
-            if (password === "") {
-              setErr(true);
-            }
-            console.log(email, password, );
-            setEmail("");
-            setPassword("");
-          },
+      <Input
+        placeholder="Confirm Password"
+        style={inputBoxStyle}
+        onChange={({ target: { value } }) => {
+          setConfirmPass(value);
+          setErr(false);
         }}
       />
       {err && <div style={{ color: "red" }}> Fill all the above details</div>}
-      <div>
-        <a href="#" style={{ textDecoration: "none" }}>
-          Create a new account
-        </a>
-      </div>
+      <Button {...{ text: "Sign up", onClick: () => {} }} />
     </div>
   );
 };
 
-export default SignIn;
+export default SignUp;
