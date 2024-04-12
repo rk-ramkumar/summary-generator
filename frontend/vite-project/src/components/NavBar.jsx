@@ -2,9 +2,9 @@
 const NavBar = ()=>{
 
     return (
-    <nav className="flex justify-around items-center bg-green-600 text-white h-24">
+    <nav className="flex justify-around items-center  text-white h-24 sticky top-0 backdrop-blur-sm bg-black/30">
         <div>
-            <h1 className="text-3xl font-bold">RAIK Blog Generation</h1>
+            <h1 className="text-3xl font-bold cursor-pointer hover:text-[#42b883]">RAIK Blog Generator</h1>
         </div>
         <div>
             <a href ="#" className="text-white">Logout</a>
