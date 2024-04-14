@@ -8,5 +8,5 @@ export const inputBoxStyle = {
 };
 
 export const endPoints = {
-  "login": `${import.meta.env.VITE_API_URL}/login`
+  "login": `${import.meta.env.VITE_API_URL}/login/`
 }

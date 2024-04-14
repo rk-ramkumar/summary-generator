@@ -1,9 +1,12 @@
 from django.shortcuts import render
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
+from django.http import JsonResponse
+from django.views.decorators.http import require_POST
+import json
 
-# Create your views here.
-@api_view(['GET'])
-def login(request):
-    print(request)
-    return Response(request)
+@require_POST
+def user_login(request):
+    data = json.loads(request.body)
+    
+    email = data.get("email")
+    password = data.get("password")
+    return JsonResponse("")
