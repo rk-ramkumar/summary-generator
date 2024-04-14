@@ -2,6 +2,8 @@ import { useState } from "react";
 import Input from "./Input";
 import { inputBoxStyle } from "../config/constants";
 import Button from "./Button";
+import axios from 'axios';
+import { endPoints } from "../config/constants";
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
@@ -38,7 +40,7 @@ const SignIn = () => {
               if (password === "") {
                 setErr(true);
               }
-              console.log(email, password);
+              handleSubmit(email, password)
               setEmail("");
               setPassword("");
             },
@@ -56,3 +58,13 @@ const SignIn = () => {
 };
 
 export default SignIn;
+
+const handleSubmit = async(email, password)=> {
+  try{
+    const res  = await axios.post(endPoints.login, {email, password})
+    console.log(res.data)
+  }catch (err){
+    console.log("|Internal ERROR")
+  }
+
+}
