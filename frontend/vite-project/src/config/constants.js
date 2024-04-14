@@ -9,7 +9,8 @@ export const inputBoxStyle = {
 
 export const endPoints = {
   "login": `${import.meta.env.VITE_API_URL}/login/`,
-  "register": `${import.meta.env.VITE_API_URL}/register/`
+  "register": `${import.meta.env.VITE_API_URL}/register/`,
+  "generate": `${import.meta.env.VITE_API_URL}/generate/`,
 }
 
 export const loginCN = import.meta.env.VITE_LOGIN_COOKIE_NAME

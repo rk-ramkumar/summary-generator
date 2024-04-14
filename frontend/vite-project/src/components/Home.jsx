@@ -3,11 +3,14 @@ import homePage from "../contents/homePage.json";
 import Summary from "./Summary";
 import Loading from "../components/Loading";
 import { getCookie } from "../utils/cookies.js";
-import { loginCN } from "../config/constants.js";
+import { endPoints, loginCN } from "../config/constants.js";
 import { Navigate } from "react-router-dom";
+import axios from "axios";
 
 const Home = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const [youtubeLink, setyoutubeLink] = useState('')
+
   return (
     <>
      {(getCookie(loginCN) === null) && <Navigate to="/login" replace={true} />}
@@ -29,8 +32,9 @@ const Home = () => {
                 type="url"
                 placeholder="Paste Youtube Link"
                 className="flex-grow p-4 border border-blue-900 rounded-lg"
+                onChange={({target:{value}})=> setyoutubeLink(value)}
               />
-              <button id="generateBtn" className="hover:bg-[#3A3A3A]">
+              <button id="generateBtn" className="hover:bg-[#3A3A3A]" onClick={()=> handleGenerate(youtubeLink)}>
                 Generate
               </button>
             </div>
@@ -43,5 +47,16 @@ const Home = () => {
     </>
   );
 };
+
+async function handleGenerate(youtubeLink){
+  try{
+    var res = await axios.post(endPoints.generate, {'link': youtubeLink})
+    console.log(res)
+
+  }catch(err){
+    console.log(err)
+  }
+}
+
 
 export default Home;
