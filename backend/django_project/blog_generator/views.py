@@ -6,6 +6,9 @@ from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
 from pytube import YouTube
 import json
+# Need to remove
+import ssl
+ssl._create_default_https_context = ssl._create_unverified_context
 
 Users = get_user_model()
 
@@ -46,7 +49,7 @@ def generateBlog(request):
     try:
         data = json.loads(request.body)
 
-        ytLink = data.link
+        ytLink = data.get("link")
         title, audioFile = extractLink(ytLink)
         
         return JsonResponse({"success": "Generated", "title": title, "audioFile": audioFile})
