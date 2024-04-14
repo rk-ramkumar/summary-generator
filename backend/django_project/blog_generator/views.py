@@ -1,12 +1,20 @@
 from django.shortcuts import render
 from django.http import JsonResponse
-from django.views.decorators.http import require_POST
+from rest_framework.decorators import api_view
+from django.contrib.auth import authenticate, login
 import json
 
-@require_POST
+@api_view(['POST'])
 def user_login(request):
     data = json.loads(request.body)
     
     email = data.get("email")
     password = data.get("password")
-    return JsonResponse("")
+    
+    user = authenticate(request, email=email, password=password)
+    
+    if user is not None:
+        login(request, user)
+        return JsonResponse({'success': 'User authenticated successfully'})
+    else:
+        return JsonResponse({'error': 'Invalid username or password'})
