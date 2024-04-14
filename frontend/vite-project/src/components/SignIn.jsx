@@ -3,7 +3,8 @@ import Input from "./Input";
 import { inputBoxStyle } from "../config/constants";
 import Button from "./Button";
 import axios from "axios";
-import { endPoints } from "../config/constants";
+import { endPoints, loginCN} from "../config/constants";
+import {setCookie} from "../utils/cookies"
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
@@ -66,9 +67,12 @@ const handleSubmit = async (email, password) => {
     const res = await axios.post(endPoints.login, { email, password });
     var actions = {
       success: () => {
+        setCookie(loginCN, crypto.randomUUID())
         window.location.href = "/";
+        
       },
       error: () => {
+        alert("User not found\nRegister to continue")
         window.location.href = "/register";
       },
     };
