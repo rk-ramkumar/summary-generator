@@ -62,7 +62,15 @@ export default SignIn;
 const handleSubmit = async(email, password)=> {
   try{
     const res  = await axios.post(endPoints.login, {email, password})
-    console.log(res.data)
+    var actions = {
+      "success": ()=>{
+        window.location.href = "/"
+      },
+      "error": ()=>{
+        window.location.href = "/register"
+      }
+    }
+    actions[res.data.status]()
   }catch (err){
     console.log("|Internal ERROR")
   }

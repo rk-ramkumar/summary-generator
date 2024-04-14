@@ -2,11 +2,16 @@ import React, { useState } from "react";
 import homePage from "../contents/homePage.json";
 import Summary from "./Summary";
 import Loading from "../components/Loading";
+import { getCookie } from "../utils/cookies.js";
+import { loginCN } from "../config/constants.js";
+import { Navigate } from "react-router-dom";
 
 const Home = () => {
   const [isLoading, setIsLoading] = useState(false);
   return (
     <>
+     {(getCookie(loginCN) === null) && <Navigate to="/login" replace={true} />}
+    
       <div className="flex-grow container mx-auto mt-10 px-4 sm:px-0">
         <div className="max-w-3xl mx-auto bg-white p-6 rounded-lg shadow-md transition-transform transform hover:scale-105 flex flex-col">
           <div>
