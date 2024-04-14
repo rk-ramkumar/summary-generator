@@ -47,6 +47,9 @@ def generateBlog(request):
         data = json.loads(request.body)
 
         ytLink = data.link
+        title, audioFile = extractLink(ytLink)
+        
+        return JsonResponse({"success": "Generated", "title": title, "audioFile": audioFile})
     except (KeyError, json.JSONDecodeError):
         return JsonResponse({"Error": "Invaild data"}, status = 400)
     
@@ -54,4 +57,8 @@ def generateBlog(request):
 def extractLink(link):
     yt = YouTube(link)
     title = yt.title
+    video = yt.streams.filter(only_audio = True).first()
+    audioFile = video.download(output_path = settings.MEDIA_ROOT)
+    
+    return title, audioFile
     
