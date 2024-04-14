@@ -9,12 +9,12 @@ import axios from "axios";
 
 const Home = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [youtubeLink, setyoutubeLink] = useState('')
+  const [youtubeLink, setyoutubeLink] = useState("");
 
   return (
     <>
-     {(getCookie(loginCN) === null) && <Navigate to="/login" replace={true} />}
-    
+      {getCookie(loginCN) === null && <Navigate to="/login" replace={true} />}
+
       <div className="flex-grow container mx-auto mt-10 px-4 sm:px-0">
         <div className="max-w-3xl mx-auto bg-white p-6 rounded-lg shadow-md transition-transform transform hover:scale-105 flex flex-col">
           <div>
@@ -32,9 +32,16 @@ const Home = () => {
                 type="url"
                 placeholder="Paste Youtube Link"
                 className="flex-grow p-4 border border-blue-900 rounded-lg"
-                onChange={({target:{value}})=> setyoutubeLink(value)}
+                onChange={({ target: { value } }) => setyoutubeLink(value)}
               />
-              <button id="generateBtn" className="hover:bg-[#3A3A3A]" onClick={()=> handleGenerate(youtubeLink)}>
+              <button
+                id="generateBtn"
+                className="hover:bg-[#3A3A3A]"
+                onClick={() => {
+                  setIsLoading(true)
+                  handleGenerate(youtubeLink, setIsLoading);
+                }}
+              >
                 Generate
               </button>
             </div>
@@ -48,15 +55,19 @@ const Home = () => {
   );
 };
 
-async function handleGenerate(youtubeLink){
-  try{
-    var res = await axios.post(endPoints.generate, {'link': youtubeLink})
-    console.log(res)
-
-  }catch(err){
-    console.log(err)
+async function handleGenerate(youtubeLink, setIsLoading) {
+  try {
+    var res = await axios.post(endPoints.generate, { link: youtubeLink });
+    console.log(res.data)
+    const actions = {
+      "success": ()=>{
+        setIsLoading(false)
+      }
+    }
+    actions[res.data.status]()
+  } catch (err) {
+    console.log(err);
   }
 }
-
 
 export default Home;

@@ -4,6 +4,7 @@ import { inputBoxStyle } from "../config/constants";
 import Button from "./Button";
 import axios from "axios";
 import { endPoints } from "../config/constants";
+import { setCookie } from "../utils/cookies";
 
 const SignUp = () => {
   const [email, setEmail] = useState("");

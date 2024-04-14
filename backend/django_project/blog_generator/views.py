@@ -53,7 +53,7 @@ def generateBlog(request):
         ytLink = data.get("link")
         title, audioFile = extractLink(ytLink)
         
-        return JsonResponse({"success": "Generated", "title": title, "audioFile": audioFile})
+        return JsonResponse({"success": "Generated", "title": title, "audioFile": audioFile, 'status': 'success'})
     except (KeyError, json.JSONDecodeError):
         return JsonResponse({"Error": "Invaild data"}, status = 400)
     
@@ -65,6 +65,9 @@ def extractLink(link):
     output = video.download(output_path = settings.MEDIA_ROOT)
     base, ext = os.path.splitext(output)
     fileName = base + '.mp3'
+    
+    if os.path.exists(fileName):
+        os.remove(fileName)
     os.rename(output, fileName)
     
     return title, fileName
