@@ -36,3 +36,5 @@ local_settings.py
 *.key
 *.password
 *.env
+
+*/media
