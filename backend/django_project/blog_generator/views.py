@@ -27,10 +27,12 @@ def user_register(request):
     
     email = data.get("email")
     password = data.get("password")
+    username = data.get("name")
     
     if Users.objects.filter(email=email).exists():
         return JsonResponse({'error': 'User already exist', 'status': 'error'})
-    
-    user = Users.object.create_user(email=email, password=password)
+
+    user = Users.objects.create_user(username, email, password)
+    user.save()
     
     return JsonResponse({'success': 'User created successfully', 'status': 'success'})
