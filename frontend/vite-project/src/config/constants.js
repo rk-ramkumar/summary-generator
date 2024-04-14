@@ -6,3 +6,7 @@ export const inputBoxStyle = {
   border: "none",
   outline: "none",
 };
+
+export const endPoints = {
+  "login": `${import.meta.env.VITE_API_URL}/login`
+}
