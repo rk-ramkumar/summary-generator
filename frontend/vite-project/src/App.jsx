@@ -1,8 +1,7 @@
+import { useEffect } from 'react';
 import './App.css';
 import Home from './components/Home.jsx'
 import NavBar from './components/NavBar.jsx'
-import SignIn from './components/SignIn.jsx'
-import SignUp from './components/SignUp.jsx';
 
 function App() {
 
