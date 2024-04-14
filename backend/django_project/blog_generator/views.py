@@ -6,6 +6,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
 from pytube import YouTube
 import json
+import os
 # Need to remove
 import ssl
 ssl._create_default_https_context = ssl._create_unverified_context
@@ -61,7 +62,10 @@ def extractLink(link):
     yt = YouTube(link)
     title = yt.title
     video = yt.streams.filter(only_audio = True).first()
-    audioFile = video.download(output_path = settings.MEDIA_ROOT)
+    output = video.download(output_path = settings.MEDIA_ROOT)
+    base, ext = os.path.splitext(output)
+    fileName = base + '.mp3'
+    os.rename(output, fileName)
     
-    return title, audioFile
+    return title, fileName
     
