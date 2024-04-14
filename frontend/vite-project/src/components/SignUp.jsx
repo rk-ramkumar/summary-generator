@@ -14,6 +14,7 @@ const SignUp = () => {
       <div className="sign-up max-w-3xl mx-auto">
         <h2 style={{ textTransform: "uppercase" }}>Sign up</h2>
         <Input
+          value={name}
           placeholder="Name"
           style={inputBoxStyle}
           onChange={({ target: { value } }) => {
@@ -22,6 +23,7 @@ const SignUp = () => {
           }}
         />
         <Input
+          value={email}
           placeholder="Email"
           style={inputBoxStyle}
           onChange={({ target: { value } }) => {
@@ -30,6 +32,7 @@ const SignUp = () => {
           }}
         />
         <Input
+          value={password}
           placeholder="Password"
           style={inputBoxStyle}
           onChange={({ target: { value } }) => {
@@ -38,6 +41,7 @@ const SignUp = () => {
           }}
         />
         <Input
+          value={confirmPass}
           placeholder="Confirm Password"
           style={inputBoxStyle}
           onChange={({ target: { value } }) => {

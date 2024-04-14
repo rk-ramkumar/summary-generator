@@ -2,7 +2,7 @@ import { useState } from "react";
 import Input from "./Input";
 import { inputBoxStyle } from "../config/constants";
 import Button from "./Button";
-import axios from 'axios';
+import axios from "axios";
 import { endPoints } from "../config/constants";
 
 const SignIn = () => {
@@ -15,6 +15,7 @@ const SignIn = () => {
       <div className="sign-in max-w-3xl mx-auto">
         <h2 style={{ textTransform: "uppercase" }}>Sign in</h2>
         <Input
+          value={email}
           placeholder="Email"
           style={inputBoxStyle}
           onChange={({ target: { value } }) => {
@@ -23,6 +24,7 @@ const SignIn = () => {
           }}
         />
         <Input
+          value={password}
           placeholder="Password"
           style={inputBoxStyle}
           onChange={({ target: { value } }) => {
@@ -40,7 +42,7 @@ const SignIn = () => {
               if (password === "") {
                 setErr(true);
               }
-              handleSubmit(email, password)
+              handleSubmit(email, password);
               setEmail("");
               setPassword("");
             },
@@ -59,20 +61,19 @@ const SignIn = () => {
 
 export default SignIn;
 
-const handleSubmit = async(email, password)=> {
-  try{
-    const res  = await axios.post(endPoints.login, {email, password})
+const handleSubmit = async (email, password) => {
+  try {
+    const res = await axios.post(endPoints.login, { email, password });
     var actions = {
-      "success": ()=>{
-        window.location.href = "/"
+      success: () => {
+        window.location.href = "/";
       },
-      "error": ()=>{
-        window.location.href = "/register"
-      }
-    }
-    actions[res.data.status]()
-  }catch (err){
-    console.log("|Internal ERROR")
+      error: () => {
+        window.location.href = "/register";
+      },
+    };
+    actions[res.data.status]();
+  } catch (err) {
+    console.log("|Internal ERROR");
   }
-
-}
+};
