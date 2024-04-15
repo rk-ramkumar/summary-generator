@@ -8,10 +8,13 @@ from pytube import YouTube
 import json
 import os
 import assemblyai as aai
+from openai import OpenAI
+
 # Need to remove
 import ssl
 ssl._create_default_https_context = ssl._create_unverified_context
 
+client = OpenAI()
 Users = get_user_model()
 
 @api_view(['POST'])
@@ -57,6 +60,15 @@ def generateBlog(request):
         
         if transcript.status == aai.TranscriptStatus.error:
             return JsonResponse({"error": transcript.error}, status = 502)
+        
+        completion = client.chat.completions.create(
+            model = "gpt-3.5-turbo",
+            messages = [
+                {"role": "user", "content": transcript.text}
+            ]
+        )
+        
+        print(completion.choices)
         
         return JsonResponse({"success": "Generated", "title": title, "text": transcript.text, 'status': 'success'})
     except (KeyError, json.JSONDecodeError):
