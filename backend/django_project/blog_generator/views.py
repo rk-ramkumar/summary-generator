@@ -53,10 +53,14 @@ def generateBlog(request):
 
         ytLink = data.get("link")
         title, audioFile = extractLink(ytLink)
+        transcript = getTranscript(audioFile)
         
-        return JsonResponse({"success": "Generated", "title": title, "audioFile": audioFile, 'status': 'success'})
+        if transcript.status == aai.TranscriptStatus.error:
+            return JsonResponse({"error": transcript.error}, status = 502)
+        
+        return JsonResponse({"success": "Generated", "title": title, "text": transcript.text, 'status': 'success'})
     except (KeyError, json.JSONDecodeError):
-        return JsonResponse({"Error": "Invaild data"}, status = 400)
+        return JsonResponse({"error": "Invaild data"}, status = 400)
     
 
 def extractLink(link):
@@ -78,8 +82,5 @@ def getTranscript(audioPath):
     aai.settings.api_key = os.getenv("ASSEMBLYAI_KEY")
     transcriber = aai.Transcriber()
     transcript = transcriber.transcribe(audioPath)
-
-    if transcript.status == aai.TranscriptStatus.error:
-        return {"error": transcript.error} 
-    else:
-        return {"succes": transcript.text}
+    
+    return transcript
