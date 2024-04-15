@@ -76,3 +76,10 @@ def extractLink(link):
 
 def getTranscript(audioPath):
     aai.settings.api_key = os.getenv("ASSEMBLYAI_KEY")
+    transcriber = aai.Transcriber()
+    transcript = transcriber.transcribe(audioPath)
+
+    if transcript.status == aai.TranscriptStatus.error:
+        return {"error": transcript.error} 
+    else:
+        return {"succes": transcript.text}
