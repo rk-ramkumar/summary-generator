@@ -7,6 +7,7 @@ from django.conf import settings
 from pytube import YouTube
 import json
 import os
+import assemblyai as aai
 # Need to remove
 import ssl
 ssl._create_default_https_context = ssl._create_unverified_context
@@ -72,3 +73,6 @@ def extractLink(link):
     
     return title, fileName
     
+
+def getTranscript(audioPath):
+    aai.settings.api_key = os.getenv("ASSEMBLYAI_KEY")
